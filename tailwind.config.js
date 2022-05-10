@@ -1,12 +1,14 @@
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {},
   },
   daisyui: {
     themes: [
       {
-        doctormytheme: {
+        doctortheme: {
           primary: "#0FCFEC",
           secondary: "#19D3AE",
           accent: "#3A4256",
@@ -18,6 +20,5 @@ module.exports = {
       "cupcake",
     ],
   },
-  //...
   plugins: [require("daisyui")],
 }
