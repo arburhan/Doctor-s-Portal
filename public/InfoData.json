@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "title":"Opening Hour",
+        "description":"koy somoy khulbe janina. sadharonot sokale khule 8/9 am er moddhei :). ",
+        "infoBGClass":"bg-gradient-to-r from-secondary to-primary", 
+        "image":"/static/media/clock.623246e126ee58a8d90f2460c08c0f6b.svg"
+    },
+    {
+        "id":2,
+        "title":"Visit our location",
+        "description":"Naogaon-4, Rajshahi, Bangladesh",
+        "infoBGClass":"bg-gradient-to-r from-secondary to-primary",
+        "image":"/static/media/marker.0bdab1635363afd723adbfe035c3358e.svg"
+    },
+    {
+        "id":3,
+        "title":"Contact us know",
+        "description":"+8801737509339",
+        "infoBGClass":"bg-gradient-to-r from-secondary to-primary",
+        "image":"/static/media/phone.0b1c25f70938a97d59d5c7c1796f0b61.svg"
+    }
+]
