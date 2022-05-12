@@ -7,7 +7,7 @@ import About from './Pages/About/About';
 
 function App() {
   return (
-    <div>
+    <div className='max-w-[1400px] mx-auto'>
       <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
