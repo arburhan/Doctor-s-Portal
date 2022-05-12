@@ -1,9 +1,14 @@
 import React from 'react';
+import footerImage from '../../assets/images/footer.png';
 
 const Footer = () => {
     let getFullYear = new Date().getFullYear();
     return (
-        <footer>
+        <footer style={{
+            background: `url(${footerImage})`,
+            backgroundSize: 'cover'
+
+        }}>
             <div className="footer p-10 ">
                 <div>
                     <span className="footer-title">Services </span>
