@@ -1,7 +1,6 @@
 import React from 'react';
 import contactbg from '../../assets/images/appointment.png';
 import PrimaryButton from '../Shared/PrimaryButton';
-import './Contact.css';
 
 
 const ContactUs = () => {
