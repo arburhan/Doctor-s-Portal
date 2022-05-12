@@ -2,7 +2,7 @@ import React from 'react';
 import Banner from './Banner/Banner';
 import ContactUs from './ContactUs';
 import ExeptionalService from './ExeptionalService';
-import Footer from './Footer';
+import Footer from '../Shared/Footer';
 import HomeAppoinment from './HomeAppoinment';
 import Info from './Info/Info';
 import Services from './Services';
