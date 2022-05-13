@@ -16,7 +16,7 @@ const ServiceCard = ({ service, setTreatment }) => {
                     }</p>
                     <p>{slots.length} {slots.length > 1 ? 'Spaces' : 'Space'} Available</p>
                     <div class="card-actions">
-                        <label onClick={() => setTreatment(service)} disabled={slots.length === 0} for="booking-modal" class="btn btn-secondary text-white modal-button">BOOK APPOINMENT</label>
+                        <label onClick={() => setTreatment(service)} disabled={slots.length === 0} for="booking-modal" class="btn border-0 bg-gradient-to-r from-secondary to-primary text-white modal-button">BOOK APPOINMENT</label>
                     </div>
 
                 </div>
