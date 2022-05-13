@@ -19,7 +19,11 @@ const AvailableAppoinments = ({ selected }) => {
                     services.map(service => <ServiceCard key={service._id} service={service} setTreatment={setTreatment}></ServiceCard>)
                 }
             </div>
-            {treatment && <BookingModal selected={selected} treatment={treatment}></BookingModal>}
+            {treatment && <BookingModal
+                selected={selected}
+                treatment={treatment}
+                setTreatment={setTreatment}
+            ></BookingModal>}
         </div>
     );
 };
