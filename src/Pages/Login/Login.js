@@ -13,19 +13,38 @@ const Login = () => {
                 <div class="card-body">
                     <h2 class="text-2xl font-bold text-center">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
+
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
                                 <span class="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="Your Email" class="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="email" placeholder="Your Email"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("email", { required: true, message: 'Email is required' }, {
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                                        message: 'Enter valid mail'
+                                    }
+                                })} />
+
                             <label class="label">
-                                <span class="label-text-alt">Alt label</span>
+                                {errors.email?.type && 'required' === <span class="label-text-alt text-red-600">{errors.email.message}</span>}
+                                {errors.email?.type && 'pattern' === <span class="label-text-alt text-red-600">{errors.email.message}</span>}
+
                             </label>
                         </div>
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
                                 <span class="label-text">Password</span>
                             </label>
+                            {/* {
+                                    minLength: {
+                                        value: 6,
+                                        message: 'Password minimum length 6'
+                                    }
+                                } */}
                             <input type="password" placeholder="Your Password" class="input input-bordered w-full max-w-xs" />
                             <label class="label">
                                 <span class="label-text-alt">Alt label</span>
