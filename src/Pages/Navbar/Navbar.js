@@ -1,13 +1,16 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const Navbar = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
+    const [user] = useAuthState(auth);
     const handleSignOut = e => {
         signOut(auth);
+        navigate('/');
+
     }
 
 
@@ -17,11 +20,11 @@ const Navbar = () => {
         <li><Link to='/appoinment'>Appoinment</Link></li>
         <li><Link to='/about'>Reviews</Link></li>
         <li><Link to='/about'>Contact Us </Link></li>
-        {
+        <li> {
             user
-                ? <button onClick={handleSignOut} >Sign out</button>
-                : <li><Link to='/login'>Login </Link></li>
-        }
+                ? <button onClick={handleSignOut} className="btn btn-ghost">Sign Out</button>
+                : <Link to='/login'>Login </Link>
+        }</li>
     </>;
 
 
