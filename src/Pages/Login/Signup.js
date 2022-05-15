@@ -4,7 +4,7 @@ import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
@@ -25,7 +25,7 @@ const Login = () => {
         <div className='flex h-screen items-center justify-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h2 className="text-2xl font-bold text-center">Login</h2>
+                    <h2 className="text-2xl font-bold text-center">Sign Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
                         <div className="form-control w-full max-w-xs">
@@ -50,7 +50,7 @@ const Login = () => {
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text">Password</span>
                             </label>
                             <input
                                 type="password" placeholder="Your Password"
@@ -78,10 +78,10 @@ const Login = () => {
                         </div>
 
                         {
-                            loading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
+                            loading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Sign Up" />
                         }
                     </form>
-                    <small className='text-center'>New to Doctors Portsl? <Link to='/signup' className="text-secondary ">Create new account</Link> </small>
+                    <small className='text-center'>Already have an account? <Link to='/login' className="text-secondary ">Please login</Link> </small>
 
                     <div className="divider">OR</div>
                     {
@@ -96,4 +96,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;
