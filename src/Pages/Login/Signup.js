@@ -2,7 +2,8 @@ import React from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import Loading from '../Shared/Loading';
 
 const Signup = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -14,13 +15,15 @@ const Signup = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
     let errorMessage;
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
+        navigate('/appoinment');
     };
-    if (error || googleError) {
-        errorMessage = <p className='text-red-600 pb-3'>Error: {error?.message || googleError?.message}</p>
+    if (error || googleError || updateError) {
+        errorMessage = <p className='text-red-600 pb-3'>Error: {error?.message || googleError?.message || updateError?.message}</p>
     }
     return (
         <div className='flex h-screen items-center justify-center'>
@@ -93,7 +96,7 @@ const Signup = () => {
                         </div>
 
                         {
-                            loading ? <button className="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Sign Up" />
+                            loading || updating ? <button className="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Sign Up" />
                         }
                     </form>
                     <small className='text-center'>Already have an account? <Link to='/login' className="text-secondary ">Please login</Link> </small>
