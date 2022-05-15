@@ -12,10 +12,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    let errorMessage;
     const onSubmit = data => {
         console.log(data);
         signInWithEmailAndPassword(data.email, data.password);
     };
+    if (error || googleError) {
+        errorMessage = <p className='text-red-600 pb-3'>Error: {error?.message || googleError?.message}</p>
+    }
     return (
         <div className='flex h-screen items-center justify-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
@@ -69,19 +73,23 @@ const Login = () => {
                                 {errors.password?.type && 'minLength' === <span className="label-text-alt text-red-600">{errors.password.message}</span>}
 
                             </label>
+                            {errorMessage}
                         </div>
 
                         {
-                            loading || googleLoading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
+                            loading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
                         }
 
 
                     </form>
 
                     <div className="divider">OR</div>
-                    <button
-                        onClick={() => signInWithGoogle()}
-                        className="btn btn-outline">Continue with google</button>
+                    {
+                        googleLoading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <button
+                            onClick={() => signInWithGoogle()}
+                            className="btn btn-outline">Continue with google</button>
+
+                    }
                 </div>
             </div>
         </div>
