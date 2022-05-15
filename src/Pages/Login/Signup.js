@@ -1,22 +1,23 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 
 const Signup = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     let errorMessage;
-    const onSubmit = data => {
-        console.log(data);
-        signInWithEmailAndPassword(data.email, data.password);
+    const onSubmit = async data => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
     };
     if (error || googleError) {
         errorMessage = <p className='text-red-600 pb-3'>Error: {error?.message || googleError?.message}</p>
@@ -28,6 +29,20 @@ const Signup = () => {
                     <h2 className="text-2xl font-bold text-center">Sign Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input
+                                type="name" placeholder="Your Name"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("name", { required: true, message: 'Name is required' })} />
+
+                            <label className="label">
+                                {errors.name?.type && 'required' === <span className="label-text-alt text-red-600">{errors.email.message}</span>}
+
+                            </label>
+                        </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -53,7 +68,7 @@ const Signup = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input
-                                type="password" placeholder="Your Password"
+                                type="password" placeholder="Crate New Password"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("password", { required: true, message: 'Password is required' },
                                     {
