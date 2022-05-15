@@ -78,14 +78,14 @@ const Login = () => {
                         </div>
 
                         {
-                            loading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
+                            loading ? <button className="btn loading w-full max-w-xs text-white">loading</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
                         }
                     </form>
                     <small className='text-center'>New to Doctors Portsl? <Link to='/signup' className="text-secondary ">Create new account</Link> </small>
 
                     <div className="divider">OR</div>
                     {
-                        googleLoading ? <button class="btn loading w-full max-w-xs text-white">loading</button> : <button
+                        googleLoading ? <button className="btn loading w-full max-w-xs text-white">loading</button> : <button
                             onClick={() => signInWithGoogle()}
                             className="btn btn-outline">Continue with google</button>
 
