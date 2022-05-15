@@ -7,8 +7,12 @@ import About from './Pages/About/About';
 import ApoinmentPage from './Pages/ApoinmentPage/ApoinmentPage';
 import Login from './Pages/Login/Login';
 import Signup from './Pages/Login/Signup';
+import RequireAuth from './Pages/RequireAuth/RequireAuth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
 
 function App() {
+  const [user, loading, error] = useAuthState(auth);
   return (
     <div className='max-w-[1400px] mx-auto'>
       <Navbar></Navbar>
@@ -16,7 +20,11 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/about' element={<About></About>}></Route>
-        <Route path='/appoinment' element={<ApoinmentPage></ApoinmentPage>}></Route>
+        <Route path='/appoinment' element={
+          <RequireAuth>
+            <ApoinmentPage></ApoinmentPage>
+          </RequireAuth>
+        }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='signup' element={<Signup></Signup>}></Route>
       </Routes>
