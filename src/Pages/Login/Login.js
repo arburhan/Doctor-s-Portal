@@ -14,7 +14,6 @@ const Login = () => {
                     <h2 class="text-2xl font-bold text-center">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
-
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
                                 <span class="label-text">Email</span>
@@ -37,21 +36,33 @@ const Login = () => {
                         </div>
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
-                                <span class="label-text">Password</span>
+                                <span class="label-text">Email</span>
                             </label>
-                            {/* {
-                                    minLength: {
-                                        value: 6,
-                                        message: 'Password minimum length 6'
-                                    }
-                                } */}
-                            <input type="password" placeholder="Your Password" class="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="password" placeholder="Your Password"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("password", { required: true, message: 'Password is required' },
+                                    {
+                                        minLength: {
+                                            value: 6,
+                                            message: 'Password minimum length 6'
+                                        }
+                                    }, {
+                                    // pattern: {
+                                    //     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,30}$/,
+                                    //     message: 'Enter valid mail'
+                                    // }
+                                })} />
+
                             <label class="label">
-                                <span class="label-text-alt">Alt label</span>
+                                {errors.password?.type && 'required' === <span class="label-text-alt text-red-600">{errors.password.message}</span>}
+                                {/* {errors.password?.type && 'pattern' === <span class="label-text-alt text-red-600">{errors.password.message}</span>} */}
+                                {errors.password?.type && 'minLength' === <span class="label-text-alt text-red-600">{errors.password.message}</span>}
+
                             </label>
                         </div>
 
-                        <input className='btn btn-active' type="submit" />
+                        <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
                     </form>
 
                     <div class="divider">OR</div>
