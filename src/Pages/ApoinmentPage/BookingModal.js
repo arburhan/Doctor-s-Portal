@@ -11,12 +11,12 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
     const formateDate = format(date, 'PP');
     const handleBooking = e => {
         e.preventDefault();
-        const selectSlot = e.target.slot.value;
+        const slot = e.target.slot.value;
         const booking = {
             treatmentId: _id,
             treatment: name,
             date: formateDate,
-            selectSlot,
+            slot,
             patient: user.email,
             patientName: user.displayName,
             phone: e.target.phone.value
@@ -35,10 +35,10 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                 console.log(data);
                 if (data.success) {
                     setTreatment(null);
-                    toast(`Appointment is set ${formateDate} at ${selectSlot}`);
+                    toast(`Appointment is set ${formateDate} at ${slot}`);
                 }
                 else {
-                    toast.error(`already book an appointment on ${data.booking?.date} at ${data.booking?.selectSlot}`);
+                    toast.error(`already book an appointment on ${data.booking?.date} at ${data.booking?.slot}`);
 
                 }
             })
