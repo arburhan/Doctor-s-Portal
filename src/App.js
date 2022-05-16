@@ -13,6 +13,8 @@ import auth from './firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import MyAppoinments from './Pages/Dashboard/MyAppoinments';
+import MyReview from './Pages/Dashboard/MyReview';
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
@@ -32,7 +34,9 @@ function App() {
           <RequireAuth>
             <Dashboard></Dashboard>
           </RequireAuth>
-        }></Route>
+        }>
+          <Route index element={<MyAppoinments></MyAppoinments>} />
+        </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='signup' element={<Signup></Signup>}></Route>
       </Routes>
