@@ -7,11 +7,34 @@ import auth from '../../firebase.init';
 const BookingModal = ({ treatment, selected, setTreatment }) => {
     const [user] = useAuthState(auth);
     const { _id, name, slots } = treatment;
+    const formateDate = format(selected, 'PP');
     const handleBooking = e => {
         e.preventDefault();
         const selectSlot = e.target.slot.value;
-        setTreatment(null)
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            date: formateDate,
+            selectSlot,
+            patient: user.email,
+            patientName: user.displayName,
+            phone: e.target.phone.value
+        }
+        // insert data
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // close modal
+                console.log(data);
+                setTreatment(null);
 
+            })
     }
     return (
         <div>
