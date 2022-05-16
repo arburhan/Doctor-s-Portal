@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 // import { format } from 'date-fns';
 
-const BookingModal = ({ treatment, date, setTreatment }) => {
+const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     const [user] = useAuthState(auth);
     const { _id, name, slots } = treatment;
     const formateDate = format(date, 'PP');
@@ -34,6 +34,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                 // close modal
                 console.log(data);
                 if (data.success) {
+                    refetch();
                     setTreatment(null);
                     toast(`Appointment is set ${formateDate} at ${slot}`);
                 }
