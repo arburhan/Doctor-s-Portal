@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 // import { format } from 'date-fns';
 
-const BookingModal = ({ treatment, selected, setTreatment }) => {
+const BookingModal = ({ treatment, date, setTreatment }) => {
     const [user] = useAuthState(auth);
     const { _id, name, slots } = treatment;
-    const formateDate = format(selected, 'PP');
+    const formateDate = format(date, 'PP');
     const handleBooking = e => {
         e.preventDefault();
         const selectSlot = e.target.slot.value;
@@ -51,7 +51,7 @@ const BookingModal = ({ treatment, selected, setTreatment }) => {
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="font-bold text-lg text-secondary">Booking for: {name}</h3>
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-4 justify-items-center my-3'>
-                        <input type="text" value={format(selected, 'PP')} className="input input-bordered w-full max-w-xs" disabled />
+                        <input type="text" value={format(date, 'PP')} className="input input-bordered w-full max-w-xs" disabled />
                         <select name='slot' className="select select-bordered w-full max-w-xs">
                             {
                                 slots.map((slot, index) =>

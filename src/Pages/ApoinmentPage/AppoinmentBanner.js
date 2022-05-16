@@ -4,7 +4,7 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 
-const AppoinmentBanner = ({ selected, setSelected }) => {
+const AppoinmentBanner = ({ date, setDate }) => {
     return (
         <div>
             <div className="hero min-h-screen">
@@ -13,8 +13,8 @@ const AppoinmentBanner = ({ selected, setSelected }) => {
                     <div className='px-16 '>
                         <DayPicker className='shadow-lg rounded-xl p-4'
                             mode="single"
-                            selected={selected}
-                            onSelect={setSelected}
+                            selected={date}
+                            onSelect={setDate}
                         />
                     </div>
                 </div>
