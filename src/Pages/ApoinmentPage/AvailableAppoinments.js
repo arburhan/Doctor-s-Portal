@@ -22,7 +22,7 @@ const AvailableAppoinments = ({ date }) => {
     //         .then(data => setServices(data))
     // }, [formateDate])
     return (
-        <div>
+        <div className='container mx-auto'>
             <p className='text-center text-secondary font-bold font-[22px]'>Available Appoinments on: {format(date, 'PP')}</p>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {

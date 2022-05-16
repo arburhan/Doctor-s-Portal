@@ -18,6 +18,9 @@ const Navbar = () => {
         <li><Link to='/home'>Home</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/appoinment'>Appoinment</Link></li>
+        {
+            user && <li><Link to='/dashboard'>Dashboard</Link></li>
+        }
         <li><Link to='/about'>Reviews</Link></li>
         <li><Link to='/about'>Contact Us </Link></li>
         <li> {

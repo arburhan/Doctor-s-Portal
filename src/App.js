@@ -12,6 +12,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
@@ -25,6 +26,11 @@ function App() {
         <Route path='/appoinment' element={
           <RequireAuth>
             <ApoinmentPage></ApoinmentPage>
+          </RequireAuth>
+        }></Route>
+        <Route path='/dashboard' element={
+          <RequireAuth>
+            <Dashboard></Dashboard>
           </RequireAuth>
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
