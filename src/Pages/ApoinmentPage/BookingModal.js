@@ -22,7 +22,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             phone: e.target.phone.value
         }
         // insert data
-        fetch('http://localhost:5000/bookings', {
+        fetch('http://localhost:5000/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
