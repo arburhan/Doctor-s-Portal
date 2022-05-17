@@ -22,11 +22,17 @@ const Login = () => {
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password);
     };
-    useEffect(() => {
-        if (token) {
-            navigate(from, { replace: true });
-        }
-    }, [token, from, navigate])
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate(from, { replace: true });
+    //     }
+    // }, [token, from, navigate])
+    // useEffect(() => {
+    //    
+    // }, [token, from, navigate])
+    if (token) {
+        navigate(from, { replace: true });
+    }
     if (error || googleError) {
         errorMessage = <p className='text-red-600 pb-3'>Error: {error?.message || googleError?.message}</p>
     }
