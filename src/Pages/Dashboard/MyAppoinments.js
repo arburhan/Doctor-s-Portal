@@ -37,8 +37,8 @@ const MyAppoinments = () => {
     return (
         <div>
             <p>My Appoinments {appoinments.length}</p>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th></th>
@@ -51,7 +51,7 @@ const MyAppoinments = () => {
                     <tbody>
                         {
                             appoinments.map((a, index) =>
-                                <tr>
+                                <tr key={index}>
                                     <th>{index + 1}</th>
                                     <td>{a.patient}</td>
                                     <td>{a.date}</td>
