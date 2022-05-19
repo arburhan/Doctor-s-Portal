@@ -17,6 +17,7 @@ import MyAppoinments from './Pages/Dashboard/MyAppoinments';
 import MyReview from './Pages/Dashboard/MyReview';
 import MyHistory from './Pages/Dashboard/MyHistory';
 import Users from './Pages/Dashboard/Users';
+import RequireAdmin from './Pages/RequireAdmin/RequireAdmin';
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
@@ -41,7 +42,11 @@ function App() {
           <Route index element={<MyAppoinments></MyAppoinments>} />
           <Route path='myreview' element={<MyReview></MyReview>}></Route>
           <Route path='myhistory' element={<MyHistory></MyHistory>}></Route>
-          <Route path='users' element={<Users></Users>}></Route>
+          <Route path='users' element={
+            <RequireAdmin>
+              <Users></Users>
+            </RequireAdmin>
+          }></Route>
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='signup' element={<Signup></Signup>}></Route>
