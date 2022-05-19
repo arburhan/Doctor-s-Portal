@@ -1,17 +1,73 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import Loading from '../Shared/Loading';
+import { toast } from 'react-toastify';
+
 
 const AddDoctor = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/services').then(res => res.json()))
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    /* 
+    3 ways to store images
+    1. third party storage // free for mongodb
+    2. your own server
+    3. Database: mongodb
+
+    // file validate system: 
+    1. YUP : file validation for react hook form
+    */
+    const imageStorageKey = '796d2b23f6713cb0cea1aac25e33af94';
     const onSubmit = async data => {
-        console.log(data)
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const img = result.data.url;
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        speciality: data.speciality,
+                        img: img
+                    }
+                    // send to database
+                    fetch('http://localhost:5000/doctors', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted.insertedId) {
+                                toast.success('doctors added successfully');
+                                reset();
+                            }
+                            else {
+                                toast.error('failed to add doctor');
+                            }
+                        })
+                }
+            })
     };
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>
             <h2 className="text-2xl">Add a New Doctor</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Name</span>
@@ -50,19 +106,36 @@ const AddDoctor = () => {
                     <label className="label">
                         <span className="label-text">Speciality</span>
                     </label>
-                    <input
-                        type="text" placeholder="Speciality"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("speciality", { required: true, message: 'Speciality is required' })} />
+                    <select {...register("speciality", { required: true, message: 'Speciality is required' })} className="select select-bordered w-full max-w-xs">
+                        {
+                            services.map(service => <option
+                                key={service._id}
+                                value={service.name}
+                            >{service.name}</option>)
+                        }
+                    </select>
 
                     <label className="label">
                         {errors.speciality?.type && 'required' === <span className="label-text-alt text-red-600">{errors.speciality.message}</span>}
                     </label>
                 </div>
+                {/* attatch file */}
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Attatch Image</span>
+                    </label>
+                    <input
+                        type='file'
+                        className="input  w-full max-w-xs"
+                        {...register("image", { required: true, message: 'image is required' })} />
 
-                {
-                    'loading' || 'updating' ? <button className="btn loading w-full max-w-xs text-white">adding</button> : <input className='btn w-full max-w-xs text-white' type="submit" value="Add" />
-                }
+                    <label className="label">
+                        {errors.image?.type && 'required' === <span className="label-text-alt text-red-600">{errors.image.message}</span>}
+
+                    </label>
+                </div>
+
+                <input className='btn w-full max-w-xs text-white' type="submit" value="Add" />
             </form>
         </div>
     );
