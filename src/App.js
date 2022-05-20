@@ -20,6 +20,7 @@ import Users from './Pages/Dashboard/Users';
 import RequireAdmin from './Pages/RequireAdmin/RequireAdmin';
 import AddDoctor from './Pages/Dashboard/AddDoctor';
 import ManageDoctors from './Pages/Dashboard/ManageDoctors';
+import Payments from './Pages/Dashboard/Payments';
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
@@ -44,6 +45,7 @@ function App() {
           <Route index element={<MyAppoinments></MyAppoinments>} />
           <Route path='myreview' element={<MyReview></MyReview>}></Route>
           <Route path='myhistory' element={<MyHistory></MyHistory>}></Route>
+          <Route path='payment/:id' element={<Payments></Payments>}></Route>
           <Route path='users' element={
             <RequireAdmin>
               <Users></Users>
