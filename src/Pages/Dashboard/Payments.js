@@ -27,9 +27,6 @@ const Payments = () => {
                     <h2 className="card-title">Pay for: {appoinment.treatment} </h2>
                     <p>Your appoinment on <span className='text-orange-500 font-bold'>{appoinment.date}</span> at <span className='text-orange-500 font-bold'>{appoinment.slot}</span>  </p>
                     <p>Please pay: ${appoinment.price} </p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
                 </div>
             </div>
             <div className="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
