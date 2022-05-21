@@ -10,4 +10,5 @@
 --------
 9. install stripe backend
 10. create a post api 
+11. store client secret
 */
