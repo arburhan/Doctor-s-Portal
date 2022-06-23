@@ -24,7 +24,7 @@ const AvailableAppoinments = ({ date }) => {
     return (
         <div className='container mx-auto'>
             <p className='text-center text-secondary font-bold font-[22px]'>Available Appoinments on: {format(date, 'PP')}</p>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-5 md:px-0'>
                 {
                     services?.map(service => <ServiceCard key={service._id} service={service} setTreatment={setTreatment}></ServiceCard>)
                 }

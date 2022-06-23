@@ -33,7 +33,6 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             .then(res => res.json())
             .then(data => {
                 // close modal
-                console.log(data);
                 if (data.success) {
                     refetch();
                     setTreatment(null);

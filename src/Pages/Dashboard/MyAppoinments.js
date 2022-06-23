@@ -18,7 +18,6 @@ const MyAppoinments = () => {
                 }
             })
                 .then(res => {
-                    console.log('respons: ', res);
                     if (res.status === 401 || res.status === 403) {
                         signOut(auth);
                         localStorage.removeItem('accessToken');
@@ -62,7 +61,6 @@ const MyAppoinments = () => {
                                         {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`} > <button className="btn btn-success">PayNow</button> </Link>}
                                         {(a.price && a.paid) && <div>
                                             <p><span className="text-success">Paid</span></p>
-                                            {console.log(a)}
                                             <p>TransactionId: <span className="text-success">{a.transactionId}</span></p>
                                         </div>}
                                     </td>

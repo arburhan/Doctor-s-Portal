@@ -30,7 +30,7 @@ const TestMonials = () => {
         }
     ]
     return (
-        <section className='container mx-auto'>
+        <section className='container mx-auto px-5 md:px-0'>
             <div className='flex justify-between'>
                 <div>
                     <p className='text-primary font-bold my-1'>Testmonial</p>
