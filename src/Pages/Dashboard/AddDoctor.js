@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 
 const AddDoctor = () => {
-    const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/services').then(res => res.json()))
+    const { data: services, isLoading } = useQuery('services', () => fetch('https://desolate-bayou-01766.herokuapp.com/services').then(res => res.json()))
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     /* 
     3 ways to store images
@@ -39,7 +39,7 @@ const AddDoctor = () => {
                         img: img
                     }
                     // send to database
-                    fetch('http://localhost:5000/doctors', {
+                    fetch('https://desolate-bayou-01766.herokuapp.com/doctors', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

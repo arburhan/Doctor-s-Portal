@@ -23,7 +23,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             phone: e.target.phone.value
         }
         // insert data
-        fetch('http://localhost:5000/booking', {
+        fetch('https://desolate-bayou-01766.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
