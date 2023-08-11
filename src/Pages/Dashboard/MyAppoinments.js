@@ -11,7 +11,7 @@ const MyAppoinments = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`https://desolate-bayou-01766.herokuapp.com/booking?patient=${user.email}`, {
+            fetch(`https://doctors-portal-server-arburhan.vercel.app/booking?patient=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem(`accessToken`)}`

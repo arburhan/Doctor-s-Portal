@@ -23,7 +23,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             phone: e.target.phone.value
         }
         // insert data
-        fetch('https://desolate-bayou-01766.herokuapp.com/booking', {
+        fetch('https://doctors-portal-server-arburhan.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
